@@ -1,0 +1,71 @@
+@prefix fuseki:  <http://jena.apache.org/fuseki#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tdb:     <http://jena.hpl.hp.com/2008/tdb#> .
+@prefix ja:      <http://jena.hpl.hp.com/2005/11/Assembler#> .
+
+[] rdf:type fuseki:Server ;
+
+  ja:context [ ja:cxtName "arq:queryTimeout" ;  ja:cxtValue "22000,30000" ] ;
+  fuseki:services (
+    <#production>
+  ) .
+
+[] ja:loadClass "com.hp.hpl.jena.tdb.TDB" .
+tdb:DatasetTDB  rdfs:subClassOf  ja:RDFDataset .
+tdb:GraphTDB    rdfs:subClassOf  ja:Model .
+
+## ---------------------------------------------------------------
+
+<#production> a fuseki:Service ;
+
+  # URI - http://host:port/fuseki
+  fuseki:name                        "fuseki" ;
+
+  # URI - http://host:port/fuseki/sparql?query=
+  fuseki:serviceQuery                "sparql" ;
+
+  # URI - http://host:port/fuseki/query?query=
+  fuseki:serviceQuery                "query" ;
+
+  # URI - http://host:port/fuseki/update?query=
+  fuseki:serviceUpdate               "update" ;
+
+  fuseki:serviceUpload               "upload" ;
+
+  # SPARQL Graph store protocol (read and write)
+  fuseki:serviceReadWriteGraphStore  "data" ;
+
+  fuseki:serviceReadGraphStore       "get" ;
+  fuseki:dataset                     <#dataset-production> ;
+  .
+
+<#dataset-production> a tdb:DatasetTDB ;
+
+  # This is the location where the dataset should be inside of Docker. Make sure that this matches the location in the Dockerfile
+  tdb:location "/data" ;
+
+  # Query timeout on this dataset (1s, 1000 ms)
+  ja:context [ ja:cxtName "arq:queryTimeout" ;  ja:cxtValue "22000" ] ;
+
+  tdb:unionDefaultGraph true ;
+  .
+
+## ---------------------------------------------------------------
+## Read-only access to a small books database.
+
+<#service2> rdf:type fuseki:Service ;
+  fuseki:name                     "books" ;
+  fuseki:serviceQuery             "query" ;
+  fuseki:serviceReadGraphStore    "get" ;
+  fuseki:dataset                   <#books> ;
+  .
+    
+<#books> rdf:type ja:RDFDataset ;
+  rdfs:label "Books" ;
+  ja:defaultGraph 
+    [ rdfs:label "books.ttl" ;
+      a ja:MemoryModel ;
+      ja:content [ja:externalContent <file:Data/books.ttl> ] ;
+    ] ;
+  .

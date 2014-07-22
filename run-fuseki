@@ -1,0 +1,5 @@
+#!/bin/bash
+
+FUSEKI_HOME=/opt/fuseki/jena-fuseki-1.0.2
+cd /opt/fuseki/jena-fuseki-1.0.2
+./fuseki-server --config="/opt/fuseki/jena-fuseki-1.0.2/user_config.ttl"
