@@ -1,4 +1,4 @@
-FROM ubuntu:precise
+FROM ubuntu:14.04
 
 MAINTAINER Alex Lynham "alex@swirrl.com"
 
