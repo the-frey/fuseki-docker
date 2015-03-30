@@ -13,9 +13,13 @@ Builds a docker image with a Fuseki install. Note that the Fuseki version is har
 
 ##To run
 
-The file named `config.ttl` will be copied into the image and used as the config file for the Fuseki instance, named `user_config.ttl`. Run like so (where `4c09eec0d47c` is your image ID):
+The file named `config.ttl` will be copied into the image and used as the config file for the Fuseki instance, named `config.ttl`, and located at `/opt/fuseki/config/config.ttl`. Run like so (where `<image>` is your image ID):
 
-    docker run -d --name fuseki -v <host-fuseki-tdb-location>:/data 4c09eec0d47c
+    docker run -d --name fuseki -v <host-fuseki-tdb-location>:/data <image>
+
+If you are running this, having not built it yourself, you can pass in a config file like so, assuming that your `config.ttl` file is in the folder `<config-folder-location>`:
+
+    docker run -d --name fuseki -v <config-folder-location>:/opt/fuseki/config <image>
 
 This will expose port 3030 by default.
 
