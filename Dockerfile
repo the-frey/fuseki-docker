@@ -6,7 +6,7 @@ RUN apt-get update
 
 RUN apt-get -y install tar wget curl openjdk-7-jre-headless
 
-RUN mkdir /opt/fuseki/fuseki
+RUN mkdir -p /opt/fuseki/fuseki
 RUN mkdir /opt/fuseki/config
 
 ADD http://apache.mirror.anlx.net/jena/binaries/jena-fuseki1-1.1.2-distribution.tar.gz /opt/fuseki/jena-fuseki-1.1.2.tar.gz
