@@ -24,3 +24,7 @@ If you are running this, having not built it yourself, you can pass in a config 
 This will expose port 3030 by default.
 
 Override the internally-mounted `/data` folder by using the `-v` flag and passing in the location of your TDB data. Note that the default `config.ttl` file expects the TDB location to be `/data`, so you will have to override that before running the build as well.
+
+## JVM Args
+
+Note that the JVM args are being overridden to provide more max swap. Change the `run-fuseki` script if you do not want to do this.

@@ -2,4 +2,4 @@
 
 FUSEKI_HOME=/opt/fuseki/jena-fuseki1-1.1.2
 cd /opt/fuseki/jena-fuseki1-1.1.2
-env JAVA_ARGS=-Xmx4096M ./fuseki-server --config="/opt/fuseki/config/config.ttl"
+env JVM_ARGS=-Xmx4096M ./fuseki-server --config="/opt/fuseki/config/config.ttl"
