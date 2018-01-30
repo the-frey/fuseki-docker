@@ -1,17 +1,17 @@
-#Fuseki Docker
+# Fuseki Docker
 
 Builds a docker image with a Fuseki install. Note that the Fuseki version is hardcoded in the HTTP request to the Apache mirror.
 
-##Prerequisites
+## Prerequisites
 
 - Docker
 - A Fuseki config file. One is included in this folder; to use your own, replace `config.ttl` with your config and edit the Dockerfile if you are mounting a TDB location other than `/data`
 
-##To build
+## To build
 
     $ docker build .
 
-##To run
+## To run
 
 The file named `config.ttl` will be copied into the image and used as the config file for the Fuseki instance, named `config.ttl`, and located at `/opt/fuseki/config/config.ttl`. Run like so (where `<image>` is your image ID):
 
